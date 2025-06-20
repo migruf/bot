@@ -1,0 +1,17 @@
+# Ignorar dependencias de Node
+node_modules/
+
+# Ignorar archivos de sesión de WhatsApp
+.session/
+session/
+
+# Ignorar Chromium de Puppeteer
+.local-chromium/
+
+# Ignorar archivos binarios grandes
+*.dll
+*.exe
+*.bin
+
+# Ignorar variables de entorno
+.env
