@@ -1,0 +1,4 @@
+2025/06/16-11:33:38.768 3068 Creating DB C:\BOT\.wwebjs_auth\session-bot-debug\Default\shared_proto_db since it was missing.
+2025/06/16-11:33:38.782 3068 Reusing MANIFEST C:\BOT\.wwebjs_auth\session-bot-debug\Default\shared_proto_db/MANIFEST-000001
+2025/06/16-11:33:38.783 3068 Recovering log #3
+2025/06/16-11:33:38.785 3068 Reusing old log C:\BOT\.wwebjs_auth\session-bot-debug\Default\shared_proto_db/000003.log 

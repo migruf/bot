@@ -1,0 +1,49 @@
+[0616/112731.002:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Feature xr-spatial-tracking's parameters are ignored.", source:  (0)
+[0616/112731.002:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'attribution-reporting'.", source:  (0)
+[0616/112731.002:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'compute-pressure'.", source:  (0)
+[0616/112731.002:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'.", source:  (0)
+[0616/112731.002:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'private-state-token-issuance'.", source:  (0)
+[0616/112731.010:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'shared-storage'.", source:  (0)
+[0616/112731.010:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'shared-storage-select-url'.", source:  (0)
+[0616/112731.010:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'private-state-token-redemption'.", source:  (0)
+[0616/112731.011:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'unload'.", source:  (0)
+[0616/112731.011:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'window-management'.", source:  (0)
+[0616/112731.011:INFO:CONSOLE(0)] "Document-Policy HTTP header: Unrecognized document policy feature name include-js-call-stacks-in-crash-reports.", source: https://web.whatsapp.com/ (0)
+[0616/112733.662:INFO:CONSOLE(163)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yz/r/PKoc0DsAqfp.js (163)
+[0616/112835.538:INFO:CONSOLE(163)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yz/r/PKoc0DsAqfp.js (163)
+[0616/112835.702:INFO:CONSOLE(6)] "Uncaught (in promise) Error: secretKey is null or undefined", source:  (6)
+[0616/112928.385:INFO:CONSOLE(163)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yz/r/PKoc0DsAqfp.js (163)
+[0616/113230.759:INFO:CONSOLE(163)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yz/r/PKoc0DsAqfp.js (163)
+[0616/113338.740:INFO:CONSOLE(1319)] "Failed to parse video contentType: video/mp4; codecs=avc1.42000a", source: https://static.whatsapp.net/rsrc.php/v4iYpu4/yN/l/rt/s9SBh3PuaUe.js (1319)
+[0616/113338.741:INFO:CONSOLE(1319)] "Failed to parse video contentType: video/mp4; codecs=hev1.1.6.L93.B0", source: https://static.whatsapp.net/rsrc.php/v4iYpu4/yN/l/rt/s9SBh3PuaUe.js (1319)
+[0616/113340.011:INFO:CONSOLE(163)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yz/r/PKoc0DsAqfp.js (163)
+[0616/113843.717:INFO:CONSOLE(163)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yz/r/PKoc0DsAqfp.js (163)
+[0616/114859.117:INFO:CONSOLE(163)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yz/r/PKoc0DsAqfp.js (163)
+[0616/115437.513:INFO:CONSOLE(163)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yz/r/PKoc0DsAqfp.js (163)
+[0616/115438.437:INFO:CONSOLE(281)] "Uncaught (in promise) #<a>", source: https://static.whatsapp.net/rsrc.php/v4/yg/r/RAqaf0lxzrQ.js (281)
+[0616/115438.437:INFO:CONSOLE(149)] "Uncaught (in promise) Error: Unexpected null or undefined: me", source: https://static.whatsapp.net/rsrc.php/v4/yq/r/yNVu2MwtLC-.js (149)
+[0616/115439.442:INFO:CONSOLE(149)] "Uncaught (in promise) Invariant Violation: Minified invariant #56367; %s", source: https://static.whatsapp.net/rsrc.php/v4/yq/r/yNVu2MwtLC-.js (149)
+[0616/115440.183:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Feature xr-spatial-tracking's parameters are ignored.", source:  (0)
+[0616/115440.183:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'attribution-reporting'.", source:  (0)
+[0616/115440.183:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'compute-pressure'.", source:  (0)
+[0616/115440.183:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'.", source:  (0)
+[0616/115440.183:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'private-state-token-issuance'.", source:  (0)
+[0616/115440.183:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'shared-storage'.", source:  (0)
+[0616/115440.183:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'shared-storage-select-url'.", source:  (0)
+[0616/115440.183:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'private-state-token-redemption'.", source:  (0)
+[0616/115440.183:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'unload'.", source:  (0)
+[0616/115440.183:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'window-management'.", source:  (0)
+[0616/115440.183:INFO:CONSOLE(0)] "Document-Policy HTTP header: Unrecognized document policy feature name include-js-call-stacks-in-crash-reports.", source: https://web.whatsapp.com/ (0)
+[0616/115441.923:ERROR:entry_impl.cc(1072)] No file for 8000000c
+[0616/115441.927:ERROR:entry_impl.cc(1072)] No file for 8000000b
+[0616/115441.936:ERROR:entry_impl.cc(1072)] No file for 8000000e
+[0616/115441.936:ERROR:entry_impl.cc(1072)] No file for 8000000d
+[0616/115441.942:ERROR:entry_impl.cc(1072)] No file for 80000016
+[0616/115441.942:ERROR:entry_impl.cc(1072)] No file for 80000014
+[0616/115441.942:ERROR:entry_impl.cc(1072)] No file for 80000013
+[0616/115441.942:ERROR:entry_impl.cc(1072)] No file for 80000012
+[0616/115441.942:ERROR:entry_impl.cc(1072)] No file for 8000000f
+[0616/115441.951:ERROR:entry_impl.cc(1072)] No file for 80000017
+[0616/115441.954:ERROR:entry_impl.cc(1072)] No file for 80000015
+[0616/115442.307:ERROR:entry_impl.cc(1072)] No file for 80000011
+[0616/115442.352:ERROR:entry_impl.cc(1072)] No file for 80000010
