@@ -6,12 +6,9 @@ const qrcode = require('qrcode-terminal');
 const config = {
     prefix: '/',
     adminNumbers: [
-           // Admin 2
-        '573165232193@c.us',
-        '573219736896@c.us'
-    
+        '573228057536@c.us',  // Admin 1
+        '573144693875@c.us'   // Admin 2
     ],
-
     maxMessages: 1000,
     restrictedGroups: {}
 };
@@ -53,17 +50,27 @@ function saveData() {
     }
 }
 
-// Función para mencionar a todos
-async function mentionAll(chat) {
+// Función para mencionar a todos (versión discreta)
+async function mentionAll(chat, customMessage = null) {
     try {
         const participants = await chat.participants;
         const mentions = participants.map(p => p.id._serialized);
-        await chat.sendMessage(
-            '📢 ¡Atención a todos! 📢',
-            { mentions }
-        );
+        
+        let text = '════════════════\n';
+        text += '    *MENCIÓN GENERAL* \n';
+        text += '════════════════\n\n';
+        
+        if (customMessage) {
+            text += `💬 *Mensaje:* ${customMessage}\n\n`;
+        }
+        
+        text += '👥 _Todos los miembros han sido notificados_\n';
+        text += '🔔 _Recibirás una alerta individual_';
+        
+        await chat.sendMessage(text, { mentions });
     } catch (error) {
         console.error('Error mencionando a todos:', error);
+        throw error;
     }
 }
 
@@ -71,22 +78,19 @@ async function mentionAll(chat) {
 async function createRoulette(chat, participants) {
     try {
         const randomIndex = Math.floor(Math.random() * participants.length);
-        const loser = participants[randomIndex];
-        const loserContact = await client.getContactById(loser);
+        const winner = participants[randomIndex];
+        const winnerContact = await client.getContactById(winner);
         
-        let rouletteText = '🎲════════════════🎲\n';
+        let rouletteText = '════════════════\n';
         rouletteText += '   *JUEGO DE LA RULETA*\n';
-        rouletteText += '🎲════════════════🎲\n\n';
-        rouletteText += `¡El perdedor es... @${loserContact.id.user}! 🎯\n\n`;
-        rouletteText += '_¡Mejor suerte la próxima vez!_';
+        rouletteText += '════════════════\n\n';
+        rouletteText += ` El ganador es: @${winnerContact.id.user}!\n\n`;
+        rouletteText += '_¡Felicidades!_ ';
         
-        await chat.sendMessage(
-            rouletteText,
-            { mentions: [loser] }
-        );
+        await chat.sendMessage(rouletteText, { mentions: [winner] });
     } catch (error) {
         console.error('Error en la ruleta:', error);
-        await chat.sendMessage('❌ Ocurrió un error al ejecutar la ruleta');
+        throw error;
     }
 }
 
@@ -164,10 +168,10 @@ client.on('message_create', async (message) => {
                 
                 if (isAdmin) {
                     helpText += '👑 *Solo admins:*\n';
-                    helpText += '🔸 `/todos` - Mencionar a todos 📢\n';
+                    helpText += '🔸 `/todos [mensaje]` - Mencionar discretamente 📢\n';
                     helpText += '🔸 `/kick @user` - Expulsar usuario 🚫\n';
-                    helpText += '🔸 `/encuesta` - Crear encuesta 📝\n';
-                    helpText += '🔸 `/ruleta` - Jugar ruleta 🎲\n';
+                    helpText += '🔸 `/encuesta "pregunta" "op1" "op2"` - Crear encuesta 📝\n';
+                    helpText += '🔸 `/ruleta @users` - Jugar ruleta 🎲\n';
                     helpText += '🔸 `/soloadmins` - Modo solo-admins ⚠️\n';
                 }
                 
@@ -188,36 +192,44 @@ client.on('message_create', async (message) => {
                         await chat.sendMessage('❌ Este comando solo funciona en grupos');
                         return;
                     }
-                    await mentionAll(chat);
-                    break;
                     
-                    case 'kick':
-    if (!chat.isGroup) {
-        await message.reply('❌ Este comando solo funciona en grupos');
-        return;
-    }
-    
-    if (!message.mentionedIds || message.mentionedIds.length === 0) {
-        await message.reply('❌ Debes mencionar al usuario (@usuario)');
-        return;
-    }
+                    // Obtener el mensaje personalizado
+                    const customMessage = message.body.slice(message.body.indexOf('todos') + 5).trim();
+                    
+                    try {
+                        await mentionAll(chat, customMessage);
+                    } catch (error) {
+                        console.error('Error ejecutando /todos:', error);
+                        await chat.sendMessage('❌ Ocurrió un error al mencionar a todos');
+                    }
+                    break;
 
-    try {
-        // Verificar si el bot es admin
-        const isBotAdmin = await isGroupAdmin(chat, client.info.wid._serialized);
-        if (!isBotAdmin) {
-            await message.reply('❌ El bot necesita ser administrador para expulsar usuarios!!');
-            return;
-        }
+                case 'kick':
+                    if (!chat.isGroup) {
+                        await message.reply('❌ Este comando solo funciona en grupos');
+                        return;
+                    }
+                    
+                    if (!message.mentionedIds || message.mentionedIds.length === 0) {
+                        await message.reply('❌ Debes mencionar al usuario (@usuario)');
+                        return;
+                    }
 
-        // Intentar expulsar
-        await chat.removeParticipants(message.mentionedIds);
-        await message.reply('✅ Usuario expulsado correctamente');
-    } catch (error) {
-        console.error('Error al expulsar:', error);
-        await message.reply('❌ No se pudo expulsar al usuario. Verifica: 1) El bot es admin, 2) El usuario no es el creador del grupo');
-    }
-    break;
+                    try {
+                        const isBotAdmin = await isGroupAdmin(chat, client.info.wid._serialized);
+                        if (!isBotAdmin) {
+                            await message.reply('❌ El bot necesita ser administrador para expulsar usuarios!');
+                            return;
+                        }
+
+                        await chat.removeParticipants(message.mentionedIds);
+                        await message.reply('✅ Usuario expulsado correctamente');
+                    } catch (error) {
+                        console.error('Error al expulsar:', error);
+                        await message.reply('❌ No se pudo expulsar al usuario. Verifica: 1) El bot es admin, 2) El usuario no es el creador del grupo');
+                    }
+                    break;
+
                 case 'encuesta':
                     if (!chat.isGroup) {
                         await chat.sendMessage('❌ Este comando solo funciona en grupos');
@@ -232,9 +244,9 @@ client.on('message_create', async (message) => {
                         const options = args.slice(1).map(opt => opt.replace(/"/g, ''));
                         groupData.polls[chat.id._serialized] = { question, options, votes: {} };
                         
-                        let pollText = '📊════════════════📊\n';
+                        let pollText = '════════════════\n';
                         pollText += `   *ENCUESTA:* ${question}\n`;
-                        pollText += '📊════════════════📊\n\n';
+                        pollText += '════════════════\n\n';
                         options.forEach((opt, i) => pollText += `${i+1}. ${opt}\n`);
                         await chat.sendMessage(pollText + `\nResponde con /votar número`);
                     } catch (error) {
@@ -271,7 +283,7 @@ client.on('message_create', async (message) => {
                     }
                     const currentPoll = groupData.polls[chat.id._serialized];
                     if (!currentPoll) {
-                        await chat.sendMessage('📭 No hay encuesta activa en este grupo');
+                        await chat.sendMessage(' No hay encuesta activa en este grupo');
                         return;
                     }
                     
@@ -280,10 +292,10 @@ client.on('message_create', async (message) => {
                         currentPoll.options.forEach((_, i) => results[i+1] = 0);
                         Object.values(currentPoll.votes).forEach(v => results[v]++);
                         
-                        let resultText = '📈════════════════📈\n';
+                        let resultText = '════════════════\n';
                         resultText += '   *RESULTADOS DE ENCUESTA*\n';
-                        resultText += '📈════════════════📈\n\n';
-                        resultText += `📌 *Pregunta:* ${currentPoll.question}\n\n`;
+                        resultText += '════════════════\n\n';
+                        resultText += ` *Pregunta:* ${currentPoll.question}\n\n`;
                         
                         currentPoll.options.forEach((opt, i) => {
                             resultText += `🔹 *Opción ${i+1}:* ${opt}\n`;
@@ -294,13 +306,13 @@ client.on('message_create', async (message) => {
                         await chat.sendMessage(resultText);
                     } catch (error) {
                         console.error('Error mostrando resultados:', error);
-                        await chat.sendMessage('❌ Ocurrió un error al mostrar los resultados');
+                        await chat.sendMessage(' Ocurrió un error al mostrar los resultados');
                     }
                     break;
 
                 case 'top':
                     if (!chat.isGroup) {
-                        await chat.sendMessage('❌ Este comando solo funciona en grupos');
+                        await chat.sendMessage(' Este comando solo funciona en grupos');
                         return;
                     }
                     try {
@@ -311,7 +323,7 @@ client.on('message_create', async (message) => {
                         
                         let topText = '🏆════════════════🏆\n';
                         topText += '   *TOP 5 ACTIVOS*\n';
-                        topText += '🏆════════════════🏆\n\n';
+                        topText += '════════════════\n\n';
                         
                         if (Object.keys(activity).length === 0) {
                             topText += '📭 Aún no hay suficiente actividad en este grupo';
@@ -401,12 +413,12 @@ client.on('message_create', async (message) => {
                         await chat.sendMessage(statusText);
                     } catch (error) {
                         console.error('Error mostrando estado de restricción:', error);
-                        await chat.sendMessage('❌ Ocurrió un error al mostrar el estado');
+                        await chat.sendMessage(' Ocurrió un error al mostrar el estado');
                     }
                     break;
 
                 default:
-                    await chat.sendMessage(`❌ Comando desconocido. Usa /help para ver los comandos disponibles`);
+                    await chat.sendMessage(` Comando desconocido. Usa /help para ver los comandos disponibles`);
                     break;
             }
         }
@@ -418,15 +430,15 @@ client.on('message_create', async (message) => {
 // Eventos del cliente
 client.on('qr', qr => {
     qrcode.generate(qr, { small: true });
+    console.log('Escanea el código QR con tu WhatsApp');
 });
 
 client.on('ready', () => {
-    console.log('✅ Bot listo y conectado!');
+    console.log(' Bot listo y conectado!');
 });
 
 client.on('disconnected', reason => {
-    console.log('❌ Bot desconectado:', reason);
-    // Intentar reconectar
+    console.log(' Bot desconectado:', reason);
     setTimeout(() => {
         client.initialize();
     }, 5000);
